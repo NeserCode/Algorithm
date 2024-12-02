@@ -50,7 +50,11 @@ export class TreeNode {
 			printNode(node.right, prefix + (isLeft ? "│   " : "    "), false)
 		}
 
-		printNode(this, "│", true)
+		printNode(this, "", true)
+	}
+
+	get height() {
+		return TreeNode.getHeight(this)
 	}
 
 	static fromLevelSearchOrder(orderArray: (number | null)[] = []) {
@@ -67,5 +71,10 @@ export class TreeNode {
 			}
 		}
 		return root
+	}
+
+	static getHeight(node: TreeNode | null): number {
+		if (node === null) return 0
+		return 1 + Math.max(this.getHeight(node.left), this.getHeight(node.right))
 	}
 }
